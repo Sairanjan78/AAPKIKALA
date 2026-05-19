@@ -32,7 +32,8 @@ const Login = () => {
                 navigate('/');
             }
         } catch (err) {
-            setError(err.response?.data?.message || 'Login failed');
+            console.error('Login Error:', err);
+            setError(err.response?.data?.message || err.message || 'Login failed');
         }
     };
 
