@@ -90,13 +90,6 @@ exports.login = async (req, res) => {
             });
         }
 
-        // Check if artist account is rejected
-        if (user.role === 'artist' && user.artistStatus === 'rejected') {
-            return res.status(403).json({
-                success: false,
-                message: 'Your artist application has been rejected. Please contact support.'
-            });
-        }
 
         // Check password
         const isPasswordValid = await user.comparePassword(password);
