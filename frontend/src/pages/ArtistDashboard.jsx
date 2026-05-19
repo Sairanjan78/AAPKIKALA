@@ -148,9 +148,17 @@ const ArtistDashboard = () => {
                         {isRejected ? 'Application Rejected' : 'Registration Pending'}
                     </span>
                     <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2.5rem', color: '#3B2A1A', margin: '0 0 1rem', fontWeight: 700 }}>Welcome, {user.name}</h1>
-                    <p style={{ fontSize: '1.05rem', color: '#666', lineHeight: 1.7, margin: '0 0 2.5rem' }}>
-                        {isRejected ? 'Your application was not approved. Please contact support.' : "Your profile is under review. You'll be able to list artworks once approved."}
-                    </p>
+                    {isRejected ? (
+                        <div style={{ textAlign: 'left', lineHeight: 1.6, marginBottom: '2rem' }}>
+                            <p>Dear {user.name},</p>
+                            <p>Thank you for submitting your profile and work to Kalamandir.</p>
+                            <p>After careful review, we have decided not to approve your application at this time.</p>
+                            <p>We appreciate the effort you put into your submission and wish you success in all your future artistic endeavors.</p>
+                            <p style={{ marginTop: '1.5rem', fontWeight: 600 }}>The Kalamandar Team</p>
+                        </div>
+                    ) : (
+                        "Your profile is under review. You'll be able to list artworks once approved."
+                    )}
                     <Link to="/" style={{ display: 'inline-block', background: '#C4622D', color: 'white', textDecoration: 'none', padding: '0.9rem 2.5rem', borderRadius: '50px', fontWeight: 700 }}>Back to Home</Link>
                 </div>
             </div>

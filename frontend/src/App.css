@@ -2155,6 +2155,8 @@ html, body {
   background-color: var(--white);
   border-radius: 40px;
   margin-top: 4rem;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @media (max-width: 768px) {
@@ -2170,10 +2172,14 @@ html, body {
   grid-template-columns: 1fr 1.2fr;
   gap: 4rem;
   align-items: center;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .about-image-story {
   position: relative;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .about-image-story img {
@@ -2182,6 +2188,8 @@ html, body {
   object-fit: cover;
   border-radius: 40px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .experience-badge {
@@ -2194,6 +2202,8 @@ html, body {
   border-radius: 30px;
   text-align: center;
   box-shadow: 0 15px 30px rgba(196, 98, 45, 0.3);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .experience-badge .years {
@@ -2216,6 +2226,8 @@ html, body {
   margin-bottom: 1.5rem;
   color: var(--bark);
   line-height: 1.2;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .about-content p {
@@ -2235,6 +2247,8 @@ html, body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .stat-icon {

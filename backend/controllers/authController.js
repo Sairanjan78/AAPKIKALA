@@ -98,6 +98,13 @@ exports.login = async (req, res) => {
                 message: 'Invalid email or password'
             });
         }
+        // Check if artist account is rejected
+        if (user.role === 'artist' && user.artistStatus === 'rejected') {
+            return res.status(403).json({
+                success: false,
+                message: 'Your artist application has been rejected. Please contact support.'
+            });
+        }
 
         // Generate token
         const token = generateToken(user._id);
