@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Users, Palette, Heart } from 'lucide-react';
 
 const AboutUs = () => {
@@ -22,7 +22,7 @@ const AboutUs = () => {
         <div className="about-content">
           <h3>Bringing Ancient Wisdom to Modern Life</h3>
           <p>
-            AAPKIKALA is embarking on a mission to ensure the stories of our ancestors, 
+            AAPKIKALAA is embarking on a mission to ensure the stories of our ancestors, 
             told through their hands, continue to thrive. We are building a platform to connect 
             the guardians of these traditions across Bharat directly with art lovers.
           </p>

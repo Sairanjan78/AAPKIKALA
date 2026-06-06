@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -42,7 +42,7 @@ const Login = () => {
             <div className="auth-container">
                 <div className="auth-card">
                     <h2>Welcome Back</h2>
-                    <p>Login to your AAPKIKALA account</p>
+                    <p>Login to your AAPKIKALAA account</p>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Email</label>

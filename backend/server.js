@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -121,7 +121,7 @@ app.use('/api/messages', messageRoutes);
 app.get('/api/health', (req, res) => {
     res.status(200).json({
         status: 'healthy',
-        message: 'AAPKIKALA API is running',
+        message: 'AAPKIKALAA API is running',
         timestamp: new Date().toISOString()
     });
 });

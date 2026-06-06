@@ -64,7 +64,7 @@ const Navbar = () => {
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container nav-content">
-                <Link to="/" className="logo">AAPKIKALA<span>.</span></Link>
+                <Link to="/" className="logo">AAPKIKALAA<span>.</span></Link>
 
                 <div className={`nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
                     <Link to="/" className="nav-link">Home</Link>
@@ -152,7 +152,7 @@ function App() {
             {!isDashboardRoute && (
                 <footer className="footer">
                     <div className="container">
-                        <p>© 2026 AAPKIKALA — Built for Indian Culture Preservation</p>
+                        <p>© 2026 AAPKIKALAA — Built for Indian Culture Preservation</p>
                     </div>
                 </footer>
             )}

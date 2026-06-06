@@ -155,7 +155,7 @@ const ArtistDashboard = () => {
                     {isRejected ? (
                         <div style={{ textAlign: 'left', lineHeight: 1.6, marginBottom: '2rem' }}>
                             <p>Dear {user.name},</p>
-                            <p>Thank you for submitting your profile and work to AAPKIKALA.</p>
+                            <p>Thank you for submitting your profile and work to AAPKIKALAA.</p>
                             <p>After careful review, we have decided not to approve your application at this time.</p>
                             <p>We appreciate the effort you put into your submission and wish you success in all your future artistic endeavors.</p>
                             <p style={{ marginTop: '1.5rem', fontWeight: 600 }}>The Kalamandar Team</p>

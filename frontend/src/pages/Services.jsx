@@ -207,7 +207,7 @@ const Services = () => {
                         {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="#D4A017" color="#D4A017" />)}
                     </div>
                     <blockquote>
-                        "AAPKIKALA turned my vague idea into a stunning 4-foot Madhubani mural for our office lobby. 
+                        "AAPKIKALAA turned my vague idea into a stunning 4-foot Madhubani mural for our office lobby. 
                         The process was transparent, and the artist's skill was phenomenal."
                     </blockquote>
                     <div className="svc-trust-author">

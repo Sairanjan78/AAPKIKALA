@@ -165,7 +165,7 @@ const AdminDashboard = () => {
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", `AAPKIKALA_Report_${new Date().toISOString().split('T')[0]}.csv`);
+        link.setAttribute("download", `AAPKIKALAA_Report_${new Date().toISOString().split('T')[0]}.csv`);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -706,7 +706,7 @@ const AdminDashboard = () => {
                                     <Trash2 size={16} /> Delete
                                 </button>
                                 <a 
-                                    href={`mailto:${msg.email}?subject=Reply from AAPKIKALA`}
+                                    href={`mailto:${msg.email}?subject=Reply from AAPKIKALAA`}
                                     style={{padding: '0.5rem 1rem', border: 'none', borderRadius: '8px', background: 'var(--clay)', color: 'white', cursor: 'pointer', textDecoration: 'none', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem'}}
                                 >
                                     <Mail size={16} /> Reply
