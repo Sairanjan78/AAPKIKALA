@@ -11,6 +11,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
 /* Premium Scrollbar */
@@ -2918,8 +2919,17 @@ html, body {
   .contact-form-v3 {
     padding: 2.5rem;
   }
+  .contact-premium-wrapper {
+    padding: 0;
+  }
+  .contact-info-v3 {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
   .info-card-v3 {
     width: 100%;
+    min-width: 0;
   }
 }
 
