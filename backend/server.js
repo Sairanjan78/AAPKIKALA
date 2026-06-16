@@ -121,7 +121,7 @@ app.use('/api/messages', messageRoutes);
 app.get('/api/health', (req, res) => {
     res.status(200).json({
         status: 'healthy',
-        message: 'AAPKIKALAA API is running',
+        message: 'AAPKIKALA API is running',
         timestamp: new Date().toISOString()
     });
 });

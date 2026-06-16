@@ -1,4 +1,4 @@
-# AAPKIKALAA — Indian Art Marketplace
+# AAPKIKALA — Indian Art Marketplace
 
 A full-stack marketplace platform connecting Indian artisans with art lovers worldwide. Built with React, Node.js, Express, and MongoDB.
 

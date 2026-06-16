@@ -42,7 +42,7 @@ const Login = () => {
             <div className="auth-container">
                 <div className="auth-card">
                     <h2>Welcome Back</h2>
-                    <p>Login to your AAPKIKALAA account</p>
+                    <p>Login to your AAPKIKALA account</p>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Email</label>

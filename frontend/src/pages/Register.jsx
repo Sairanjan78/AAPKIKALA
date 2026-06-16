@@ -42,7 +42,7 @@ const Register = () => {
         <div className="auth-wrapper">
             <div className="auth-container">
                 <div className="auth-card artist-auth-card">
-                    <h2>Join AAPKIKALAA</h2>
+                    <h2>Join AAPKIKALA</h2>
                     <p>Start your journey with Indian Art</p>
                     
                     <div className="role-selector">

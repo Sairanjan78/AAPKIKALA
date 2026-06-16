@@ -67,13 +67,13 @@ const Navbar = () => {
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container nav-content">
-                <Link to="/" className="logo">AAPKIKALAA<span>.</span></Link>
+                <Link to="/" className="logo">AAPKIKALA<span>.</span></Link>
 
                 <div className={`nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
                     {/* Mobile Only Header */}
                     <div className="mobile-menu-header">
                         <div className="mobile-logo-wrap">
-                            <span className="mobile-logo-text">AAPKIKALAA<span className="ochre-dot">.</span></span>
+                            <span className="mobile-logo-text">AAPKIKALA<span className="ochre-dot">.</span></span>
                             <span className="mobile-logo-subtitle">Heritage & Artistry</span>
                         </div>
                         <button className="mobile-close-btn" onClick={() => setIsMenuOpen(false)} aria-label="Close menu">
@@ -166,7 +166,7 @@ const Navbar = () => {
                             <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social-icon" aria-label="Instagram">
                                 <Globe size={20} />
                             </a>
-                            <a href="mailto:contact@aapkikalaa.com" className="social-icon" aria-label="Mail">
+                            <a href="mailto:contact@aapkikala.com" className="social-icon" aria-label="Mail">
                                 <Mail size={20} />
                             </a>
                             <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social-icon" aria-label="Facebook">
@@ -235,7 +235,7 @@ function App() {
             {!isDashboardRoute && (
                 <footer className="footer">
                     <div className="container">
-                        <p>© 2026 AAPKIKALAA — Built for Indian Culture Preservation</p>
+                        <p>© 2026 AAPKIKALA — Built for Indian Culture Preservation</p>
                     </div>
                 </footer>
             )}
