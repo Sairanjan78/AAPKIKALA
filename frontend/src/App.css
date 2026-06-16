@@ -6194,7 +6194,7 @@ html, body {
   .nav-chevron { display: none; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .cart-hero {
     padding: 5rem 0 2.5rem;
   }
@@ -6251,6 +6251,11 @@ html, body {
     padding: 0.2rem;
   }
 
+  /* Checkout Layout Mobile optimizations */
+  .checkout-layout {
+    padding: 1.5rem 0 3rem;
+  }
+
   .checkout-form-header {
     flex-direction: column;
     align-items: stretch;
@@ -6265,15 +6270,49 @@ html, body {
 
   .checkout-form-grid {
     grid-template-columns: 1fr;
+    gap: 0.8rem;
   }
 
+  .checkout-field {
+    margin-bottom: 0.8rem;
+  }
+
+  .checkout-field label {
+    margin-bottom: 0.2rem;
+  }
+
+  .checkout-field input {
+    padding: 0.65rem 0.85rem;
+  }
+
+  /* Progress steps bar for Mobile */
   .checkout-progress {
-    flex-wrap: wrap;
-    gap: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .checkout-step-ind {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.72rem;
+    align-items: center;
+    text-align: center;
+    min-width: 70px;
   }
 
   .checkout-step-ind span {
-    display: none;
+    display: inline !important;
+  }
+
+  .checkout-step-line {
+    width: 25px;
+    height: 2px;
+    margin-top: 0;
+    transform: translateY(-8px);
   }
 }
 
