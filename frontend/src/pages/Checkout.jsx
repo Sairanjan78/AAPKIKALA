@@ -174,9 +174,9 @@ const Checkout = () => {
                     <div className="checkout-form-section">
                         {step === 1 && (
                             <form onSubmit={handleAddressSubmit} className="checkout-form">
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                    <h3 style={{ margin: 0 }}>Shipping Address</h3>
-                                    <button type="button" onClick={handleUseCurrentLocation} disabled={locating} className="cart-checkout-btn" style={{ padding: '0.4rem 0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', width: 'auto', fontSize: '0.9rem' }}>
+                                <div className="checkout-form-header">
+                                    <h3>Shipping Address</h3>
+                                    <button type="button" onClick={handleUseCurrentLocation} disabled={locating} className="checkout-location-btn">
                                         <MapPin size={14} /> {locating ? 'Locating...' : 'Use Current Location'}
                                     </button>
                                 </div>
