@@ -312,6 +312,14 @@ html, body {
     display: none !important;
   }
 
+  .navbar {
+    overflow: hidden;
+  }
+
+  .navbar.menu-open {
+    overflow: visible;
+  }
+
   .nav-links {
     position: fixed;
     top: 0;
@@ -5808,6 +5816,84 @@ html, body {
    MY ACCOUNT PAGE
    ============================================= */
 
+/* Premium Account Button Styles */
+.myaccount-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  text-decoration: none;
+  width: fit-content;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.myaccount-btn-primary {
+  background: linear-gradient(135deg, var(--clay) 0%, #b25523 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(196, 98, 45, 0.25);
+}
+
+.myaccount-btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196, 98, 45, 0.35);
+  background: linear-gradient(135deg, #d36a31 0%, #a64c1e 100%);
+}
+
+.myaccount-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.myaccount-btn-secondary {
+  background: rgba(196, 98, 45, 0.06);
+  color: var(--clay);
+  border: 1.5px solid rgba(196, 98, 45, 0.15);
+}
+
+.myaccount-btn-secondary:hover {
+  background: rgba(196, 98, 45, 0.12);
+  color: #a64c1e;
+  border-color: rgba(196, 98, 45, 0.3);
+  transform: translateY(-2px);
+}
+
+.myaccount-btn-danger {
+  background: #fdf0ef;
+  color: #e74c3c;
+  border: 1.5px solid rgba(231, 76, 60, 0.15);
+}
+
+.myaccount-btn-danger:hover {
+  background: #e74c3c;
+  color: white;
+  border-color: #e74c3c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+}
+
+.myaccount-btn-outline {
+  background: transparent;
+  color: #555;
+  border: 1.5px solid #ddd;
+}
+
+.myaccount-btn-outline:hover {
+  background: #f5f5f5;
+  color: var(--bark);
+  border-color: #bbb;
+  transform: translateY(-2px);
+}
+
 .myaccount-page {
   min-height: 100vh;
   background: var(--cream);
@@ -5817,7 +5903,8 @@ html, body {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 2rem;
-  padding: 3rem 0 5rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
   align-items: start;
 }
 
@@ -5829,6 +5916,7 @@ html, body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   position: sticky;
   top: 100px;
+  min-width: 0;
 }
 
 .myaccount-user-card {
@@ -5934,6 +6022,7 @@ html, body {
 /* Content area */
 .myaccount-content {
   min-height: 400px;
+  min-width: 0;
 }
 
 .myaccount-content h2 {
@@ -6166,6 +6255,235 @@ html, body {
   background: #c0392b;
 }
 
+/* Address Form Card and List */
+.address-form-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.address-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.address-form-header h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--bark);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+}
+
+.address-gps-btn {
+  padding: 0.5rem 1.2rem;
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  background: var(--clay);
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.address-gps-btn:hover {
+  background: #d36a31;
+}
+
+.address-select, .address-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #e8e0d4;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: #222;
+  background: #fff;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.address-select:focus, .address-input:focus {
+  outline: none;
+  border-color: var(--clay);
+}
+
+.address-default-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #faf9f5;
+  border-radius: 8px;
+  border: 1px dashed #e8e2d2;
+}
+
+.address-checkbox {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--clay);
+}
+
+.address-default-checkbox-wrapper label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: 500;
+  color: #3B2A1A;
+  font-size: 0.9rem;
+}
+
+.address-form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.address-save-btn {
+  width: auto;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+}
+
+.address-cancel-btn {
+  width: auto;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #555;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.address-cancel-btn:hover {
+  background: #f5f5f5;
+}
+
+.addresses-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.address-card {
+  padding: 1.2rem;
+  border: 1.5px solid #e8e0d4;
+  border-radius: 12px;
+  position: relative;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.address-card.default {
+  border: 2px solid var(--ochre);
+}
+
+.address-badge-default {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  background: var(--ochre);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.address-label {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #f0ebe2;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  color: var(--bark);
+}
+
+.address-street {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  color: var(--bark);
+}
+
+.address-details {
+  margin: 0 0 0.5rem;
+  color: #666;
+  font-size: 0.88rem;
+}
+
+.address-card-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #f0ebe2;
+  padding-top: 0.8rem;
+}
+
+.address-btn-edit {
+  color: var(--clay);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: opacity 0.2s;
+}
+
+.address-btn-edit:hover {
+  opacity: 0.8;
+}
+
+.address-btn-delete {
+  color: #e74c3c;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: opacity 0.2s;
+}
+
+.address-btn-delete:hover {
+  opacity: 0.8;
+}
+
+.myaccount-profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.profile-save-btn {
+  margin-top: 0.5rem;
+}
+.address-book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.address-book-section {
+  margin-top: 3rem;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .cart-layout,
@@ -6179,16 +6497,27 @@ html, body {
 
   .myaccount-layout {
     grid-template-columns: 1fr;
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
   }
 
   .myaccount-sidebar {
     position: static;
+    padding: 1.25rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    margin-bottom: 1.5rem;
   }
 
   .myaccount-nav {
+    display: flex;
     flex-direction: row;
     overflow-x: auto;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    padding: 0.4rem;
+    background: #faf8f5;
+    border-radius: 16px;
+    border: 1px solid rgba(196, 98, 45, 0.08);
     scrollbar-width: none;
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
@@ -6200,15 +6529,29 @@ html, body {
 
   .myaccount-nav-btn {
     white-space: nowrap;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 1.2rem;
     width: auto;
     flex-shrink: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: #666;
+  }
+
+  .myaccount-nav-btn.active {
+    background: white;
+    color: var(--clay);
+    box-shadow: 0 2px 8px rgba(196, 98, 45, 0.1);
   }
 
   .logout-nav {
     margin-top: 0;
     border-top: none;
     padding-top: 0.6rem;
+    color: #e74c3c;
+  }
+
+  .logout-nav:hover {
+    background: #fdf0ef;
   }
 
   .nav-chevron { display: none; }
@@ -6333,6 +6676,77 @@ html, body {
     height: 2px;
     margin-top: 0;
     transform: translateY(-8px);
+  }
+
+  /* My Account Responsive Elements */
+  .order-card {
+    padding: 1rem;
+  }
+
+  .myaccount-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .order-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .order-card-top > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .order-status-badge {
+    align-self: flex-start;
+  }
+
+  .address-form-card {
+    padding: 1.25rem;
+  }
+
+  .myaccount-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-card-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .order-cancel-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .address-form-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .address-form-header button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .address-form-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .address-save-btn, .address-cancel-btn {
+    width: 100%;
+    text-align: center;
   }
 }
 

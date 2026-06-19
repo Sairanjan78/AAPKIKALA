@@ -65,7 +65,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
             <div className="container nav-content">
                 <Link to="/" className="logo">AAPKIKALA<span>.</span></Link>
 

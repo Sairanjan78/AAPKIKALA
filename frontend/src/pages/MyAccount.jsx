@@ -246,7 +246,7 @@ const MyAccount = () => {
                                     <ShoppingBag size={48} strokeWidth={1} />
                                     <h3>No orders yet</h3>
                                     <p>Your order history will appear here after your first purchase.</p>
-                                    <Link to="/products" className="cart-shop-btn">Start Shopping</Link>
+                                    <Link to="/products" className="myaccount-btn myaccount-btn-primary">Start Shopping</Link>
                                 </div>
                             ) : (
                                 <div className="orders-list">
@@ -289,7 +289,7 @@ const MyAccount = () => {
                                                     {['pending', 'confirmed'].includes(order.orderStatus) && (
                                                         <button
                                                             onClick={() => handleCancelOrder(order._id)}
-                                                            className="order-cancel-btn"
+                                                            className="myaccount-btn myaccount-btn-danger order-cancel-btn"
                                                         >
                                                             Cancel Order
                                                         </button>
@@ -306,7 +306,7 @@ const MyAccount = () => {
                     {/* Profile Tab */}
                     {activeTab === 'profile' && (
                         <div className="myaccount-profile">
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div className="myaccount-profile-header">
                                 <h2>Edit Profile</h2>
                             </div>
                             {saveMsg && (
@@ -325,45 +325,45 @@ const MyAccount = () => {
                                         <input value={profileForm.phone} onChange={e => setProfileForm(p => ({ ...p, phone: e.target.value }))} />
                                     </div>
                                 </div>
-                                <button type="submit" disabled={saving} className="cart-checkout-btn" style={{ marginTop: '0.5rem' }}>
+                                <button type="submit" disabled={saving} className="myaccount-btn myaccount-btn-primary profile-save-btn">
                                     {saving ? 'Saving...' : 'Save Profile'}
                                 </button>
                             </form>
 
-                            <div style={{ marginTop: '3rem' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                            <div className="address-book-section">
+                                <div className="address-book-header">
                                     <h2>Address Book</h2>
                                     {!addressForm && (
-                                        <button onClick={() => setAddressForm({ street: '', city: '', state: '', pincode: '', label: 'Home', isDefault: addresses.length === 0 })} className="cart-checkout-btn" style={{ width: 'auto', padding: '0.5rem 1rem' }}>
+                                        <button onClick={() => setAddressForm({ street: '', city: '', state: '', pincode: '', label: 'Home', isDefault: addresses.length === 0 })} className="myaccount-btn myaccount-btn-primary add-address-btn">
                                             + Add New Address
                                         </button>
                                     )}
                                 </div>
 
                                 {addressForm ? (
-                                    <div className="address-form-card" style={{ padding: '2rem', background: '#fff', border: 'none', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', marginBottom: '2rem' }}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid #eee', paddingBottom: '1rem' }}>
-                                            <h4 style={{ margin: 0, fontSize: '1.2rem', color: '#3B2A1A' }}>{addressForm.index !== undefined ? 'Edit Address' : 'Add New Address'}</h4>
-                                            <button type="button" onClick={handleUseCurrentLocation} disabled={locating} className="cart-checkout-btn" style={{ padding: '0.5rem 1rem', width: 'auto', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', borderRadius: '8px' }}>
+                                    <div className="address-form-card">
+                                        <div className="address-form-header">
+                                            <h4>{addressForm.index !== undefined ? 'Edit Address' : 'Add New Address'}</h4>
+                                            <button type="button" onClick={handleUseCurrentLocation} disabled={locating} className="myaccount-btn myaccount-btn-secondary address-gps-btn">
                                                 <MapPin size={16} /> {locating ? 'Locating...' : 'Use GPS'}
                                             </button>
                                         </div>
                                         <div className="checkout-form-grid">
                                             <div className="checkout-field">
-                                                <label style={{ fontWeight: '500', color: '#555' }}>Label</label>
-                                                <select value={addressForm.label} onChange={e => setAddressForm(p => ({ ...p, label: e.target.value }))} style={{ width: '100%', padding: '0.8rem 1rem', border: '1px solid #ddd', borderRadius: '8px', background: '#fcfcfc', color: '#333', outline: 'none' }}>
+                                                <label>Label</label>
+                                                <select value={addressForm.label} onChange={e => setAddressForm(p => ({ ...p, label: e.target.value }))} className="address-select">
                                                     <option value="Home">Home</option>
                                                     <option value="Work">Work</option>
                                                     <option value="Other">Other</option>
                                                 </select>
                                             </div>
                                             <div className="checkout-field">
-                                                <label style={{ fontWeight: '500', color: '#555' }}>Pincode (6 digits)</label>
-                                                <input pattern="\d{6}" title="Please enter exactly 6 digits" required value={addressForm.pincode} onChange={e => setAddressForm(p => ({ ...p, pincode: e.target.value }))} placeholder="e.g. 756032" style={{ padding: '0.8rem 1rem', borderRadius: '8px', border: '1px solid #ddd' }} />
+                                                <label>Pincode (6 digits)</label>
+                                                <input pattern="\d{6}" title="Please enter exactly 6 digits" required value={addressForm.pincode} onChange={e => setAddressForm(p => ({ ...p, pincode: e.target.value }))} placeholder="e.g. 756032" className="address-input" />
                                             </div>
                                         </div>
                                         <div className="checkout-field">
-                                            <label style={{ fontWeight: '500', color: '#555' }}>Street Address (Must include House/Building No.)</label>
+                                            <label>Street Address (Must include House/Building No.)</label>
                                             <input 
                                                 required 
                                                 pattern=".*[0-9].*" 
@@ -371,24 +371,24 @@ const MyAccount = () => {
                                                 value={addressForm.street} 
                                                 onChange={e => setAddressForm(p => ({ ...p, street: e.target.value }))} 
                                                 placeholder="e.g. Plot No 42, Main Street" 
-                                                style={{ padding: '0.8rem 1rem', borderRadius: '8px', border: '1px solid #ddd' }}
+                                                className="address-input"
                                             />
                                         </div>
                                         <div className="checkout-form-grid">
                                             <div className="checkout-field">
-                                                <label style={{ fontWeight: '500', color: '#555' }}>City</label>
-                                                <input required value={addressForm.city} onChange={e => setAddressForm(p => ({ ...p, city: e.target.value }))} style={{ padding: '0.8rem 1rem', borderRadius: '8px', border: '1px solid #ddd' }} />
+                                                <label>City</label>
+                                                <input required value={addressForm.city} onChange={e => setAddressForm(p => ({ ...p, city: e.target.value }))} className="address-input" />
                                             </div>
                                             <div className="checkout-field">
-                                                <label style={{ fontWeight: '500', color: '#555' }}>State</label>
-                                                <input required value={addressForm.state} onChange={e => setAddressForm(p => ({ ...p, state: e.target.value }))} style={{ padding: '0.8rem 1rem', borderRadius: '8px', border: '1px solid #ddd' }} />
+                                                <label>State</label>
+                                                <input required value={addressForm.state} onChange={e => setAddressForm(p => ({ ...p, state: e.target.value }))} className="address-input" />
                                             </div>
                                         </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '1.5rem', padding: '1rem', background: '#faf9f5', borderRadius: '8px', border: '1px dashed #e8e2d2' }}>
-                                            <input type="checkbox" id="isDefault" checked={addressForm.isDefault} onChange={e => setAddressForm(p => ({ ...p, isDefault: e.target.checked }))} style={{ width: '18px', height: '18px', margin: 0, cursor: 'pointer', accentColor: '#D4A017' }} />
-                                            <label htmlFor="isDefault" style={{ margin: 0, cursor: 'pointer', fontWeight: '500', color: '#3B2A1A' }}>Set as my Default Address</label>
+                                        <div className="address-default-checkbox-wrapper">
+                                            <input type="checkbox" id="isDefault" checked={addressForm.isDefault} onChange={e => setAddressForm(p => ({ ...p, isDefault: e.target.checked }))} className="address-checkbox" />
+                                            <label htmlFor="isDefault">Set as my Default Address</label>
                                         </div>
-                                        <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+                                        <div className="address-form-actions">
                                             <button 
                                                 onClick={() => {
                                                     let newAddresses = [...addresses];
@@ -403,24 +403,24 @@ const MyAccount = () => {
                                                     setAddresses(newAddresses);
                                                     setAddressForm(null);
                                                 }}
-                                                className="cart-checkout-btn" style={{ width: 'auto', padding: '0.8rem 2rem', borderRadius: '8px' }}
+                                                className="myaccount-btn myaccount-btn-primary address-save-btn"
                                             >
                                                 Save Address
                                             </button>
-                                            <button onClick={() => setAddressForm(null)} style={{ width: 'auto', padding: '0.8rem 2rem', borderRadius: '8px', background: 'transparent', border: '1px solid #ddd', color: '#555', cursor: 'pointer', fontWeight: 'bold' }}>Cancel</button>
+                                            <button onClick={() => setAddressForm(null)} className="myaccount-btn myaccount-btn-outline address-cancel-btn">Cancel</button>
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="addresses-list" style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))' }}>
+                                    <div className="addresses-list">
                                         {addresses.map((addr, idx) => (
-                                            <div key={idx} style={{ padding: '1rem', border: addr.isDefault ? '2px solid #D4A017' : '1px solid #ddd', borderRadius: '8px', position: 'relative' }}>
-                                                {addr.isDefault && <span style={{ position: 'absolute', top: '-10px', right: '10px', background: '#D4A017', color: 'white', padding: '2px 8px', borderRadius: '12px', fontSize: '0.75rem' }}>Default</span>}
-                                                <span style={{ display: 'inline-block', padding: '2px 8px', background: '#f0ebe2', borderRadius: '4px', fontSize: '0.8rem', marginBottom: '0.5rem' }}>{addr.label}</span>
-                                                <p style={{ margin: '0 0 0.5rem' }}><strong>{addr.street}</strong></p>
-                                                <p style={{ margin: '0 0 0.5rem', color: '#666' }}>{addr.city}, {addr.state} - {addr.pincode}</p>
-                                                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                                                    <button onClick={() => setAddressForm({ ...addr, index: idx })} style={{ color: '#D4A017', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>Edit</button>
-                                                    <button onClick={() => setAddresses(addresses.filter((_, i) => i !== idx))} style={{ color: '#e74c3c', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>Delete</button>
+                                            <div key={idx} className={`address-card ${addr.isDefault ? 'default' : ''}`}>
+                                                {addr.isDefault && <span className="address-badge-default">Default</span>}
+                                                <span className="address-label">{addr.label}</span>
+                                                <p className="address-street"><strong>{addr.street}</strong></p>
+                                                <p className="address-details">{addr.city}, {addr.state} - {addr.pincode}</p>
+                                                <div className="address-card-actions">
+                                                    <button onClick={() => setAddressForm({ ...addr, index: idx })} className="address-btn-edit">Edit</button>
+                                                    <button onClick={() => setAddresses(addresses.filter((_, i) => i !== idx))} className="address-btn-delete">Delete</button>
                                                 </div>
                                             </div>
                                         ))}
@@ -439,7 +439,7 @@ const MyAccount = () => {
                                 <h4>Account Type</h4>
                                 <p>You are logged in as a <strong>{user.role === 'artist' ? 'Artist' : 'Customer'}</strong>.</p>
                                 {user.role === 'artist' && (
-                                    <Link to="/dashboard" className="cart-shop-btn" style={{ marginTop: '1rem', display: 'inline-flex' }}>
+                                    <Link to="/dashboard" className="myaccount-btn myaccount-btn-primary" style={{ marginTop: '1rem' }}>
                                         Go to Artist Dashboard
                                     </Link>
                                 )}
@@ -447,7 +447,7 @@ const MyAccount = () => {
                             <div className="settings-card danger-zone">
                                 <h4>Danger Zone</h4>
                                 <p>Logging out will clear your session. Your cart items will be preserved.</p>
-                                <button onClick={logout} className="settings-logout-btn">
+                                <button onClick={logout} className="myaccount-btn myaccount-btn-danger settings-logout-btn">
                                     <LogOut size={16} /> Logout
                                 </button>
                             </div>
