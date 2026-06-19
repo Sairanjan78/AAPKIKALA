@@ -8,21 +8,21 @@
   --white: #ffffff;
   --grey: #f0f0f0;
 
-  /* 3D / Depth System */
+  /* 3D / Depth System — Subtle */
   --shadow-soft:
-    0 10px 25px -5px rgba(59, 42, 26, 0.08),
-    0 8px 10px -6px rgba(59, 42, 26, 0.06),
-    inset 0 2px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -3px 0 rgba(59, 42, 26, 0.025);
+    0 4px 14px -4px rgba(59, 42, 26, 0.07),
+    0 2px 6px -2px rgba(59, 42, 26, 0.04),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -2px 0 rgba(59, 42, 26, 0.015);
   --shadow-hover:
-    0 22px 44px -10px rgba(59, 42, 26, 0.15),
-    inset 0 2px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
-  --border-soft: 1.5px solid rgba(232, 224, 212, 0.7);
+    0 12px 28px -8px rgba(59, 42, 26, 0.11),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -2px 0 rgba(59, 42, 26, 0.015);
+  --border-soft: 1px solid rgba(232, 224, 212, 0.6);
 
   /* Glow Tokens */
-  --glow-clay: rgba(196, 98, 45, 0.18);
-  --glow-ochre: rgba(212, 160, 23, 0.15);
+  --glow-clay: rgba(196, 98, 45, 0.12);
+  --glow-ochre: rgba(212, 160, 23, 0.10);
 }
 
 /* ============================================
@@ -91,15 +91,13 @@ html, body {
   text-transform: uppercase;
 }
 
-/* Gradient accent on section headings */
+/* Section headings — solid legible color, no gradient clip */
 .section-title,
 .myaccount-hero h1,
 .profile-form h2,
 .myaccount-content h2 {
-  background: linear-gradient(135deg, var(--bark) 0%, #6b4226 60%, var(--clay) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--bark);
+  -webkit-text-fill-color: unset;
 }
 
 /* ============================================
@@ -7153,24 +7151,33 @@ html, body {
 
   .myaccount-sidebar {
     position: static;
-    padding: 1.25rem;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+
+  /* User card on mobile: stack avatar + text left-aligned */
+  .myaccount-user-card {
+    padding-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .myaccount-nav {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
-    gap: 0.6rem;
-    padding: 0.4rem;
+    gap: 0.4rem;
+    padding: 0.35rem;
+    width: 100%;
     background: #faf8f5;
-    border-radius: 16px;
+    border-radius: 12px;
     border: 1px solid rgba(196, 98, 45, 0.08);
     scrollbar-width: none;
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
   }
 
   .myaccount-nav::-webkit-scrollbar {
@@ -7179,12 +7186,23 @@ html, body {
 
   .myaccount-nav-btn {
     white-space: nowrap;
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 0.9rem;
     width: auto;
-    flex-shrink: 0;
-    border-radius: 12px;
+    flex: 0 0 auto;
+    border-radius: 10px;
     background: transparent;
     color: #666;
+    font-size: 0.875rem;
+    gap: 0.4rem;
+  }
+
+  /* On mobile, hide the 3D icon circle and show plain icons inline */
+  .tab-icon-3d {
+    width: 22px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
 
   .myaccount-nav-btn.active {
@@ -7193,10 +7211,17 @@ html, body {
     box-shadow: 0 2px 8px rgba(196, 98, 45, 0.1);
   }
 
+  .myaccount-nav-btn.active .tab-icon-3d {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--clay);
+  }
+
   .logout-nav {
     margin-top: 0;
     border-top: none;
-    padding-top: 0.6rem;
+    padding-top: 0.5rem;
     color: #e74c3c;
   }
 
