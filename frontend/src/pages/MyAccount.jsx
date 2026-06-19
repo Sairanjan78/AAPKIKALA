@@ -181,9 +181,9 @@ const MyAccount = () => {
 
     return (
         <div className="myaccount-page">
-            <div className="cart-hero">
+        <div className="cart-hero myaccount-hero">
                 <div className="container">
-                    <span className="section-tag" style={{ color: '#D4A017' }}>My Account</span>
+                    <span className="section-tag myaccount-hero-label">My Account</span>
                     <h1>Welcome, {user.name?.split(' ')[0]}</h1>
                 </div>
             </div>
