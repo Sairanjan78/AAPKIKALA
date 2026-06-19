@@ -174,9 +174,9 @@ const MyAccount = () => {
     if (!user) return null;
 
     const tabs = [
-        { id: 'orders', label: 'My Orders', icon: <Package size={18} /> },
-        { id: 'profile', label: 'Profile', icon: <User size={18} /> },
-        { id: 'settings', label: 'Settings', icon: <Settings size={18} /> },
+        { id: 'orders', label: 'My Orders', icon: <span className="tab-icon-3d"><Package size={16} /></span> },
+        { id: 'profile', label: 'Profile', icon: <span className="tab-icon-3d"><User size={16} /></span> },
+        { id: 'settings', label: 'Settings', icon: <span className="tab-icon-3d"><Settings size={16} /></span> },
     ];
 
     return (
@@ -225,7 +225,7 @@ const MyAccount = () => {
                             </button>
                         ))}
                         <button className="myaccount-nav-btn logout-nav" onClick={logout}>
-                            <LogOut size={18} /> Logout
+                            <span className="tab-icon-3d"><LogOut size={16} /></span> Logout
                         </button>
                     </nav>
                 </div>

@@ -1072,9 +1072,13 @@ html, body {
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 
+    0 10px 25px -5px rgba(59, 42, 26, 0.08), 
+    0 8px 10px -6px rgba(59, 42, 26, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
+  border: 1.5px solid rgba(232, 224, 212, 0.7);
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid rgba(0, 0, 0, 0.03);
   animation: revealUp 0.8s forwards;
 }
 
@@ -1092,8 +1096,11 @@ html, body {
 
 .product-card:hover {
   transform: translateY(-12px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-  border-color: rgba(196, 98, 45, 0.1);
+  box-shadow: 
+    0 25px 40px -10px rgba(59, 42, 26, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
+  border-color: rgba(196, 98, 45, 0.25);
 }
 
 .image-holder {
@@ -5828,23 +5835,41 @@ html, body {
   border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
   text-decoration: none;
   width: fit-content;
   font-family: 'DM Sans', sans-serif;
+  position: relative;
+}
+
+.myaccount-btn:active:not(:disabled) {
+  transform: translateY(1.5px) !important;
 }
 
 .myaccount-btn-primary {
   background: linear-gradient(135deg, var(--clay) 0%, #b25523 100%);
   color: white;
-  box-shadow: 0 4px 14px rgba(196, 98, 45, 0.25);
+  box-shadow: 
+    0 4px 14px rgba(196, 98, 45, 0.25),
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.2);
 }
 
 .myaccount-btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(196, 98, 45, 0.35);
+  transform: translateY(-1.5px);
+  box-shadow: 
+    0 6px 20px rgba(196, 98, 45, 0.35),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.2);
   background: linear-gradient(135deg, #d36a31 0%, #a64c1e 100%);
+}
+
+.myaccount-btn-primary:active:not(:disabled) {
+  box-shadow: 
+    0 2px 6px rgba(196, 98, 45, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .myaccount-btn-primary:disabled {
@@ -5858,40 +5883,78 @@ html, body {
   background: rgba(196, 98, 45, 0.06);
   color: var(--clay);
   border: 1.5px solid rgba(196, 98, 45, 0.15);
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2.5px 0 rgba(196, 98, 45, 0.12);
 }
 
 .myaccount-btn-secondary:hover {
   background: rgba(196, 98, 45, 0.12);
   color: #a64c1e;
   border-color: rgba(196, 98, 45, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-1.5px);
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2.5px 0 rgba(196, 98, 45, 0.12),
+    0 4px 10px rgba(196, 98, 45, 0.08);
+}
+
+.myaccount-btn-secondary:active {
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(196, 98, 45, 0.12);
 }
 
 .myaccount-btn-danger {
   background: #fdf0ef;
   color: #e74c3c;
   border: 1.5px solid rgba(231, 76, 60, 0.15);
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2.5px 0 rgba(231, 76, 60, 0.12);
 }
 
 .myaccount-btn-danger:hover {
   background: #e74c3c;
   color: white;
   border-color: #e74c3c;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+  transform: translateY(-1.5px);
+  box-shadow: 
+    0 4px 12px rgba(231, 76, 60, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.myaccount-btn-danger:active {
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .myaccount-btn-outline {
   background: transparent;
   color: #555;
   border: 1.5px solid #ddd;
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2.5px 0 rgba(0, 0, 0, 0.03);
 }
 
 .myaccount-btn-outline:hover {
   background: #f5f5f5;
   color: var(--bark);
   border-color: #bbb;
-  transform: translateY(-2px);
+  transform: translateY(-1.5px);
+  box-shadow: 
+    inset 0 2px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -2.5px 0 rgba(0, 0, 0, 0.03),
+    0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.myaccount-btn-outline:active {
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
 }
 
 .myaccount-page {
@@ -5913,7 +5976,12 @@ html, body {
   background: white;
   border-radius: 20px;
   padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow: 
+    0 10px 25px -5px rgba(59, 42, 26, 0.08), 
+    0 8px 10px -6px rgba(59, 42, 26, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
+  border: 1.5px solid rgba(232, 224, 212, 0.7);
   position: sticky;
   top: 100px;
   min-width: 0;
@@ -5973,15 +6041,15 @@ html, body {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 0.8rem 1rem;
+  padding: 0.6rem 1rem;
   border: none;
   background: none;
   border-radius: 12px;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: #666;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
   width: 100%;
 }
@@ -5992,9 +6060,58 @@ html, body {
 }
 
 .myaccount-nav-btn.active {
-  background: rgba(196, 98, 45, 0.08);
+  background: rgba(196, 98, 45, 0.05);
   color: var(--clay);
-  font-weight: 600;
+}
+
+/* Sidebar Nav Icons 3D Capsule Wrapper */
+.tab-icon-3d {
+  background: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 2px 6px rgba(59, 42, 26, 0.05),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1.5px 0 rgba(59, 42, 26, 0.02);
+  border: 1px solid rgba(232, 224, 212, 0.6);
+  color: #777;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.myaccount-nav-btn:hover .tab-icon-3d {
+  transform: scale(1.05);
+  box-shadow: 
+    0 4px 8px rgba(59, 42, 26, 0.1),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85);
+  border-color: rgba(196, 98, 45, 0.2);
+  color: var(--clay);
+}
+
+.myaccount-nav-btn.active .tab-icon-3d {
+  background: linear-gradient(135deg, var(--clay) 0%, #b25523 100%);
+  color: white !important;
+  border-color: var(--clay);
+  box-shadow: 
+    0 4px 10px rgba(196, 98, 45, 0.25),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.logout-nav .tab-icon-3d {
+  color: #e74c3c;
+  border-color: rgba(231, 76, 60, 0.15);
+  background: #fdf0ef;
+}
+
+.logout-nav:hover .tab-icon-3d {
+  background: #e74c3c;
+  color: white !important;
+  border-color: #e74c3c;
 }
 
 .nav-chevron {
@@ -6073,12 +6190,23 @@ html, body {
   background: white;
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-  transition: box-shadow 0.2s;
+  box-shadow: 
+    0 10px 25px -5px rgba(59, 42, 26, 0.08), 
+    0 8px 10px -6px rgba(59, 42, 26, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
+  border: 1.5px solid rgba(232, 224, 212, 0.7);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .order-card:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 15px 30px -10px rgba(59, 42, 26, 0.12), 
+    0 8px 10px -6px rgba(59, 42, 26, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
+  border-color: rgba(196, 98, 45, 0.2);
 }
 
 .order-card-top {
@@ -6217,7 +6345,12 @@ html, body {
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  box-shadow: 
+    0 10px 25px -5px rgba(59, 42, 26, 0.08), 
+    0 8px 10px -6px rgba(59, 42, 26, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
+  border: 1.5px solid rgba(232, 224, 212, 0.7);
 }
 
 .settings-card h4 {
@@ -6258,10 +6391,15 @@ html, body {
 /* Address Form Card and List */
 .address-form-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-radius: 16px;
   margin-bottom: 2rem;
   padding: 2rem;
+  box-shadow: 
+    0 10px 25px -5px rgba(59, 42, 26, 0.08), 
+    0 8px 10px -6px rgba(59, 42, 26, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -3px 0 rgba(59, 42, 26, 0.02);
+  border: 1.5px solid rgba(232, 224, 212, 0.7);
 }
 
 .address-form-header {
@@ -6381,15 +6519,30 @@ html, body {
 
 .address-card {
   padding: 1.2rem;
-  border: 1.5px solid #e8e0d4;
+  border: 1.5px solid rgba(232, 224, 212, 0.8);
   border-radius: 12px;
   position: relative;
   background: white;
-  transition: border-color 0.2s;
+  box-shadow: 
+    0 6px 15px -4px rgba(59, 42, 26, 0.06),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2px 0 rgba(59, 42, 26, 0.02);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.address-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 10px 20px -5px rgba(59, 42, 26, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85);
+  border-color: rgba(196, 98, 45, 0.2);
 }
 
 .address-card.default {
   border: 2px solid var(--ochre);
+  box-shadow: 
+    0 8px 18px -4px rgba(196, 98, 45, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.85);
 }
 
 .address-badge-default {
