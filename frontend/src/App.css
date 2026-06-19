@@ -6479,10 +6479,29 @@ html, body {
     inset 0 -1px 0 rgba(0, 0, 0, 0.03);
 }
 
+
+/* ============================================================
+   MOBILE APP PROFILE HERO  (only visible on ≤900px)
+   ============================================================ */
+.mobile-profile-hero {
+  display: none; /* hidden on desktop */
+}
+
+/* ============================================================
+   MOBILE APP BOTTOM NAV  (only visible on ≤900px)
+   ============================================================ */
+.mobile-bottom-nav {
+  display: none; /* hidden on desktop */
+}
+
+/* ============================================================
+   MY ACCOUNT PAGE
+   ============================================================ */
 .myaccount-page {
   min-height: 100vh;
   background: var(--cream);
 }
+
 
 .myaccount-layout {
   display: grid;
@@ -7170,92 +7189,309 @@ html, body {
     position: static;
   }
 
-  .myaccount-layout {
-    grid-template-columns: 1fr;
-    padding-top: 1rem;
-    padding-bottom: 3rem;
-    gap: 1rem;
-  }
+  /* ============================================================
+     MOBILE APP LAYOUT OVERRIDES
+     ============================================================ */
 
-  /* ---- Sidebar on mobile becomes a compact card ---- */
-  .myaccount-sidebar {
-    position: static;
-    padding: 1rem 1rem 0.75rem;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(59, 42, 26, 0.06);
-    border: 1px solid rgba(232, 224, 212, 0.5);
-    margin-bottom: 0;
-    overflow: hidden;
-  }
-
-  .myaccount-user-card {
-    padding-bottom: 0.85rem;
-    margin-bottom: 0.75rem;
-    gap: 0.75rem;
-  }
-
-  /* ---- Nav: 3 tabs share equal width, NO horizontal scroll ---- */
-  .myaccount-nav {
+  /* Show mobile profile hero, hide desktop hero */
+  .mobile-profile-hero {
     display: flex;
-    flex-direction: row;
-    overflow: visible;
-    gap: 0;
-    padding: 0.25rem;
-    width: 100%;
-    background: rgba(245, 239, 224, 0.6);
-    border-radius: 12px;
-    border: 1px solid rgba(196, 98, 45, 0.1);
-    box-sizing: border-box;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .myaccount-nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Each tab takes equal space */
-  .myaccount-nav-btn {
-    flex: 1;
-    white-space: nowrap;
-    padding: 0.55rem 0.5rem;
-    width: auto;
-    border-radius: 10px;
-    background: transparent;
-    color: #777;
-    font-size: 0.8rem;
-    font-weight: 600;
-    gap: 0.3rem;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 1.5rem 2rem;
+    background: linear-gradient(150deg, var(--bark) 0%, #5a3520 55%, #8B4A1F 100%);
+    position: relative;
+    overflow: hidden;
     text-align: center;
   }
 
-  /* Flat icon on mobile — no 3D circle */
-  .tab-icon-3d {
-    width: 20px;
-    height: 20px;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    color: inherit;
+  /* Decorative rings in mobile hero */
+  .mobile-profile-hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 35px solid rgba(212,160,23,0.1);
+    pointer-events: none;
   }
 
-  .myaccount-nav-btn.active {
+  .mobile-profile-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    border: 25px solid rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+
+  .mobile-back-btn {
+    position: absolute;
+    top: 1.1rem; left: 1.1rem;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: background 0.2s, color 0.2s;
+    z-index: 2;
+  }
+
+  .mobile-back-btn:hover {
+    background: rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  /* Avatar */
+  .mobile-avatar-wrap {
+    position: relative;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-bottom: 0.9rem;
+  }
+
+  .mobile-avatar-img {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 0 3px rgba(212,160,23,0.35), 0 6px 20px rgba(0,0,0,0.3);
+  }
+
+  .mobile-avatar-fallback {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--clay), var(--ochre));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700;
+    color: white;
+    border: 3px solid rgba(255,255,255,0.25);
+    box-shadow: 0 0 0 3px rgba(212,160,23,0.35), 0 6px 20px rgba(0,0,0,0.3);
+    letter-spacing: -0.5px;
+  }
+
+  .mobile-avatar-camera {
+    position: absolute;
+    bottom: 2px; right: 2px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--clay);
+    border: 2px solid white;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+
+  .mobile-profile-name {
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    line-height: 1.2;
+  }
+
+  .mobile-profile-email {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.82rem;
+    margin: 0;
+    letter-spacing: 0.2px;
+  }
+
+  .mobile-role-badge {
+    margin-top: 0.65rem;
+    padding: 0.25rem 0.85rem;
+    border-radius: 50px;
+    background: rgba(212, 160, 23, 0.2);
+    border: 1px solid rgba(212, 160, 23, 0.4);
+    color: var(--ochre);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .desktop-hero-only {
+    display: none !important;
+  }
+
+  /* Hide the whole desktop sidebar */
+  .desktop-only-sidebar {
+    display: none !important;
+  }
+
+  /* Layout: single column, no gap from sidebar */
+  .myaccount-layout {
+    grid-template-columns: 1fr;
+    padding-top: 0.75rem;
+    padding-bottom: 5.5rem; /* room for bottom nav */
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100%;
+  }
+
+  /* Content fills full width */
+  .myaccount-content {
+    padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Content headings */
+  .myaccount-content h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--bark);
+    padding-top: 0.5rem;
+  }
+
+  /* ============================================================
+     ORDER CARDS — App-style list
+     ============================================================ */
+  .order-card {
+    border-radius: 16px;
+    margin-bottom: 0.85rem;
+    padding: 1rem;
     background: white;
-    color: var(--clay);
-    box-shadow: 0 2px 8px rgba(196, 98, 45, 0.12);
+    border: 1px solid rgba(232,224,212,0.6);
   }
 
-  .myaccount-nav-btn.active .tab-icon-3d {
-    background: transparent;
+  .order-items-preview {
+    margin: 0.6rem 0;
+  }
+
+  .order-item-mini {
+    gap: 0.6rem;
+    padding: 0.4rem 0;
+  }
+
+  /* ============================================================
+     PROFILE FORM — Full width on mobile
+     ============================================================ */
+  .checkout-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem;
+  }
+
+  .profile-save-btn,
+  .add-address-btn {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.85rem;
+    font-size: 1rem;
+    border-radius: 14px;
+  }
+
+  /* Address book section */
+  .address-book-section {
+    margin-top: 1.5rem;
+  }
+
+  .address-book-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .address-card {
+    border-radius: 14px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ============================================================
+     SETTINGS TAB — App-style rows
+     ============================================================ */
+  .settings-card {
+    border-radius: 16px;
+    padding: 1.1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .settings-logout-btn {
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+    border-radius: 14px;
+    margin-top: 0.5rem;
+  }
+
+  /* ============================================================
+     FIXED BOTTOM NAVIGATION BAR
+     ============================================================ */
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 200;
+    background: white;
+    border-top: 1px solid rgba(232, 224, 212, 0.8);
+    box-shadow: 0 -4px 20px rgba(59, 42, 26, 0.1);
+    padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    /* Safari iOS safe area */
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  .mobile-bottom-nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    background: none;
     border: none;
-    box-shadow: none;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    color: #999;
+    border-radius: 12px;
+    transition: color 0.2s, background 0.2s;
+    min-height: 52px;
+    position: relative;
+  }
+
+  .mobile-bottom-nav-btn.active {
     color: var(--clay);
   }
 
-  /* Hide logout from nav on mobile (available in Settings tab) */
-  .logout-nav {
-    display: none;
+  /* Active indicator dot */
+  .mobile-bottom-nav-btn.active::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 22px; height: 3px;
+    border-radius: 0 0 4px 4px;
+    background: var(--clay);
+  }
+
+  .mobile-nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    border-radius: 12px;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .mobile-bottom-nav-btn.active .mobile-nav-icon {
+    background: rgba(196, 98, 45, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .mobile-nav-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1;
   }
 
   .nav-chevron { display: none; }

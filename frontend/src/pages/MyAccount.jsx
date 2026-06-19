@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import {
     Package, User, MapPin, Clock, ChevronRight, LogOut,
-    ShoppingBag, Settings, ArrowLeft, CheckCircle, Truck, XCircle, Loader2, Camera
+    ShoppingBag, Settings, ArrowLeft, CheckCircle, Truck, XCircle, Loader2, Camera, Home
 } from 'lucide-react';
 
 const STATUS_CONFIG = {
@@ -22,9 +22,7 @@ const MyAccount = () => {
     const [activeTab, setActiveTab] = useState('orders');
     const [orders, setOrders] = useState([]);
     const [loadingOrders, setLoadingOrders] = useState(true);
-    const [profileForm, setProfileForm] = useState({
-        name: '', phone: ''
-    });
+    const [profileForm, setProfileForm] = useState({ name: '', phone: '' });
     const [addresses, setAddresses] = useState([]);
     const [addressForm, setAddressForm] = useState(null);
     const [saving, setSaving] = useState(false);
@@ -34,20 +32,10 @@ const MyAccount = () => {
 
     useEffect(() => {
         if (!user) { navigate('/login'); return; }
-        setProfileForm({
-            name: user.name || '',
-            phone: user.phone || ''
-        });
-        
-        // Migrate legacy location to addresses if needed
+        setProfileForm({ name: user.name || '', phone: user.phone || '' });
         let initialAddresses = user.addresses || [];
         if (initialAddresses.length === 0 && user.location && user.location.city) {
-            initialAddresses = [{
-                ...user.location,
-                label: 'Home',
-                isDefault: true,
-                _id: 'legacy'
-            }];
+            initialAddresses = [{ ...user.location, label: 'Home', isDefault: true, _id: 'legacy' }];
         }
         setAddresses(initialAddresses);
     }, [user, navigate]);
@@ -60,9 +48,7 @@ const MyAccount = () => {
         setLoadingOrders(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('/api/orders', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const res = await axios.get('/api/orders', { headers: { Authorization: `Bearer ${token}` } });
             setOrders(res.data.data?.orders || []);
         } catch (err) {
             console.error('Failed to fetch orders:', err);
@@ -73,16 +59,12 @@ const MyAccount = () => {
 
     const handleProfileSave = async (e) => {
         e.preventDefault();
-        setSaving(true);
-        setSaveMsg('');
+        setSaving(true); setSaveMsg('');
         try {
             const token = localStorage.getItem('token');
             const res = await axios.put('/api/auth/profile', {
-                name: profileForm.name,
-                phone: profileForm.phone,
-                addresses: addresses
+                name: profileForm.name, phone: profileForm.phone, addresses
             }, { headers: { Authorization: `Bearer ${token}` } });
-
             updateUser(res.data.data);
             setSaveMsg('Profile updated successfully!');
             setTimeout(() => setSaveMsg(''), 3000);
@@ -98,7 +80,6 @@ const MyAccount = () => {
         if (!file) return;
         if (!file.type.startsWith('image/')) { alert('Please select an image file'); return; }
         if (file.size > 5 * 1024 * 1024) { alert('Image must be under 5MB'); return; }
-
         const token = localStorage.getItem('token');
         const fd = new FormData();
         fd.append('photo', file);
@@ -108,14 +89,9 @@ const MyAccount = () => {
                 headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
             });
             const imageUrl = uploadRes.data.data.url;
-
-            await axios.put('/api/auth/profile', { profileImage: imageUrl }, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-
+            await axios.put('/api/auth/profile', { profileImage: imageUrl }, { headers: { Authorization: `Bearer ${token}` } });
             updateUser({ profileImage: imageUrl });
         } catch (err) {
-            console.error('Profile photo upload failed:', err);
             alert('Failed to update profile photo');
         } finally {
             setProfilePhotoUploading(false);
@@ -123,43 +99,30 @@ const MyAccount = () => {
     };
 
     const handleUseCurrentLocation = () => {
-        if (!navigator.geolocation) {
-            alert('Geolocation is not supported by your browser');
-            return;
-        }
-
+        if (!navigator.geolocation) { alert('Geolocation is not supported'); return; }
         setLocating(true);
         navigator.geolocation.getCurrentPosition(async (position) => {
             try {
                 const { latitude, longitude } = position.coords;
                 const res = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-                if (res.data && res.data.address) {
+                if (res.data?.address) {
                     const addr = res.data.address;
                     const street = [addr.road, addr.suburb, addr.neighbourhood].filter(Boolean).join(', ');
-                    const city = addr.city || addr.town || addr.county || '';
-                    
                     setAddressForm(prev => prev ? {
                         ...prev,
                         street: street || prev.street,
-                        city: city || prev.city,
+                        city: addr.city || addr.town || addr.county || prev.city,
                         state: addr.state || prev.state,
                         pincode: addr.postcode || prev.pincode
                     } : null);
                 }
-            } catch (err) {
-                console.error('Error fetching location', err);
-                alert('Failed to get address from current location');
-            } finally {
-                setLocating(false);
-            }
-        }, (err) => {
-            setLocating(false);
-            alert('Unable to retrieve your location');
-        });
+            } catch { alert('Failed to get address from current location'); }
+            finally { setLocating(false); }
+        }, () => { setLocating(false); alert('Unable to retrieve your location'); });
     };
 
     const handleCancelOrder = async (orderId) => {
-        if (!window.confirm('Are you sure you want to cancel this order?')) return;
+        if (!window.confirm('Cancel this order?')) return;
         try {
             const token = localStorage.getItem('token');
             await axios.put(`/api/orders/${orderId}/cancel`, { reason: 'Customer requested' }, {
@@ -174,39 +137,61 @@ const MyAccount = () => {
     if (!user) return null;
 
     const tabs = [
-        { id: 'orders', label: 'My Orders', icon: <span className="tab-icon-3d"><Package size={16} /></span> },
-        { id: 'profile', label: 'Profile', icon: <span className="tab-icon-3d"><User size={16} /></span> },
-        { id: 'settings', label: 'Settings', icon: <span className="tab-icon-3d"><Settings size={16} /></span> },
+        { id: 'orders', label: 'Orders', mobileLabel: 'Orders', icon: <Package size={20} /> },
+        { id: 'profile', label: 'Profile', mobileLabel: 'Profile', icon: <User size={20} /> },
+        { id: 'settings', label: 'Settings', mobileLabel: 'Settings', icon: <Settings size={20} /> },
     ];
+
+    const initials = user.name?.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || '?';
 
     return (
         <div className="myaccount-page">
-        <div className="cart-hero myaccount-hero">
+
+            {/* ── MOBILE: App-style gradient profile header ── */}
+            <div className="mobile-profile-hero">
+                <Link to="/" className="mobile-back-btn" aria-label="Back to Home">
+                    <Home size={18} />
+                </Link>
+                <div className="mobile-avatar-wrap" onClick={() => document.getElementById('profile-photo-input-m').click()}>
+                    <input id="profile-photo-input-m" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleProfilePhotoChange} />
+                    {user.profileImage ? (
+                        <img src={user.profileImage} alt={user.name} className="mobile-avatar-img" />
+                    ) : (
+                        <div className="mobile-avatar-fallback">{initials}</div>
+                    )}
+                    <div className="mobile-avatar-camera">
+                        {profilePhotoUploading ? <Loader2 size={14} className="spin-icon" /> : <Camera size={14} />}
+                    </div>
+                </div>
+                <h2 className="mobile-profile-name">{user.name}</h2>
+                <p className="mobile-profile-email">{user.email}</p>
+                {user.role === 'artist' && (
+                    <span className="mobile-role-badge">Artist</span>
+                )}
+            </div>
+
+            {/* ── DESKTOP: Traditional hero ── */}
+            <div className="cart-hero myaccount-hero desktop-hero-only">
                 <div className="container">
                     <span className="section-tag myaccount-hero-label">My Account</span>
                     <h1>Welcome, {user.name?.split(' ')[0]}</h1>
                 </div>
             </div>
 
+            {/* ── DESKTOP layout with sidebar ── */}
             <div className="container myaccount-layout">
-                {/* Sidebar */}
-                <div className="myaccount-sidebar">
+                {/* Desktop Sidebar */}
+                <div className="myaccount-sidebar desktop-only-sidebar">
                     <div className="myaccount-user-card">
                         <div className="profile-avatar-wrapper" onClick={() => document.getElementById('profile-photo-input').click()} style={{ width: '60px', height: '60px', fontSize: '1.5rem', marginBottom: 0 }}>
                             <input id="profile-photo-input" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleProfilePhotoChange} />
                             {user.profileImage ? (
                                 <img src={user.profileImage} alt="" className="profile-avatar-img" />
                             ) : (
-                                <div className="profile-avatar-fallback">
-                                    {user.name?.[0] || '?'}
-                                </div>
+                                <div className="profile-avatar-fallback">{user.name?.[0] || '?'}</div>
                             )}
                             <div className="profile-avatar-overlay">
-                                {profilePhotoUploading ? (
-                                    <div className="profile-avatar-spinner"></div>
-                                ) : (
-                                    <Camera size={16} />
-                                )}
+                                {profilePhotoUploading ? <div className="profile-avatar-spinner"></div> : <Camera size={16} />}
                             </div>
                         </div>
                         <div>
@@ -221,7 +206,8 @@ const MyAccount = () => {
                                 className={`myaccount-nav-btn ${activeTab === tab.id ? 'active' : ''}`}
                                 onClick={() => setActiveTab(tab.id)}
                             >
-                                {tab.icon} {tab.label} <ChevronRight size={14} className="nav-chevron" />
+                                <span className="tab-icon-3d">{tab.icon}</span> {tab.label}
+                                <ChevronRight size={14} className="nav-chevron" />
                             </button>
                         ))}
                         <button className="myaccount-nav-btn logout-nav" onClick={logout}>
@@ -230,8 +216,9 @@ const MyAccount = () => {
                     </nav>
                 </div>
 
-                {/* Content */}
+                {/* Content area */}
                 <div className="myaccount-content">
+
                     {/* Orders Tab */}
                     {activeTab === 'orders' && (
                         <div className="myaccount-orders">
@@ -267,15 +254,10 @@ const MyAccount = () => {
                                                         {st.icon} {st.label}
                                                     </span>
                                                 </div>
-
                                                 <div className="order-items-preview">
                                                     {order.items.map((item, i) => (
                                                         <div key={i} className="order-item-mini">
-                                                            {item.image ? (
-                                                                <img src={item.image} alt="" />
-                                                            ) : (
-                                                                <div className="order-item-mini-ph"><Package size={14} /></div>
-                                                            )}
+                                                            {item.image ? <img src={item.image} alt="" /> : <div className="order-item-mini-ph"><Package size={14} /></div>}
                                                             <div>
                                                                 <span>{item.title}</span>
                                                                 <span className="order-item-qty">×{item.quantity}</span>
@@ -283,14 +265,10 @@ const MyAccount = () => {
                                                         </div>
                                                     ))}
                                                 </div>
-
                                                 <div className="order-card-bottom">
                                                     <span className="order-total">₹{order.totalAmount?.toLocaleString('en-IN')}</span>
                                                     {['pending', 'confirmed'].includes(order.orderStatus) && (
-                                                        <button
-                                                            onClick={() => handleCancelOrder(order._id)}
-                                                            className="myaccount-btn myaccount-btn-danger order-cancel-btn"
-                                                        >
+                                                        <button onClick={() => handleCancelOrder(order._id)} className="myaccount-btn myaccount-btn-danger order-cancel-btn">
                                                             Cancel Order
                                                         </button>
                                                     )}
@@ -310,9 +288,7 @@ const MyAccount = () => {
                                 <h2>Edit Profile</h2>
                             </div>
                             {saveMsg && (
-                                <p className={`profile-msg ${saveMsg.includes('success') ? 'success' : 'error'}`}>
-                                    {saveMsg}
-                                </p>
+                                <p className={`profile-msg ${saveMsg.includes('success') ? 'success' : 'error'}`}>{saveMsg}</p>
                             )}
                             <form onSubmit={handleProfileSave} className="profile-form">
                                 <div className="checkout-form-grid">
@@ -339,7 +315,6 @@ const MyAccount = () => {
                                         </button>
                                     )}
                                 </div>
-
                                 {addressForm ? (
                                     <div className="address-form-card">
                                         <div className="address-form-header">
@@ -359,20 +334,12 @@ const MyAccount = () => {
                                             </div>
                                             <div className="checkout-field">
                                                 <label>Pincode (6 digits)</label>
-                                                <input pattern="\d{6}" title="Please enter exactly 6 digits" required value={addressForm.pincode} onChange={e => setAddressForm(p => ({ ...p, pincode: e.target.value }))} placeholder="e.g. 756032" className="address-input" />
+                                                <input pattern="\d{6}" required value={addressForm.pincode} onChange={e => setAddressForm(p => ({ ...p, pincode: e.target.value }))} placeholder="e.g. 756032" className="address-input" />
                                             </div>
                                         </div>
                                         <div className="checkout-field">
-                                            <label>Street Address (Must include House/Building No.)</label>
-                                            <input 
-                                                required 
-                                                pattern=".*[0-9].*" 
-                                                title="Address must contain a house or building number"
-                                                value={addressForm.street} 
-                                                onChange={e => setAddressForm(p => ({ ...p, street: e.target.value }))} 
-                                                placeholder="e.g. Plot No 42, Main Street" 
-                                                className="address-input"
-                                            />
+                                            <label>Street Address</label>
+                                            <input required pattern=".*[0-9].*" value={addressForm.street} onChange={e => setAddressForm(p => ({ ...p, street: e.target.value }))} placeholder="e.g. Plot No 42, Main Street" className="address-input" />
                                         </div>
                                         <div className="checkout-form-grid">
                                             <div className="checkout-field">
@@ -389,22 +356,14 @@ const MyAccount = () => {
                                             <label htmlFor="isDefault">Set as my Default Address</label>
                                         </div>
                                         <div className="address-form-actions">
-                                            <button 
-                                                onClick={() => {
-                                                    let newAddresses = [...addresses];
-                                                    if (addressForm.isDefault) {
-                                                        newAddresses = newAddresses.map(a => ({ ...a, isDefault: false }));
-                                                    }
-                                                    if (addressForm.index !== undefined) {
-                                                        newAddresses[addressForm.index] = addressForm;
-                                                    } else {
-                                                        newAddresses.push(addressForm);
-                                                    }
-                                                    setAddresses(newAddresses);
-                                                    setAddressForm(null);
-                                                }}
-                                                className="myaccount-btn myaccount-btn-primary address-save-btn"
-                                            >
+                                            <button onClick={() => {
+                                                let newAddresses = [...addresses];
+                                                if (addressForm.isDefault) newAddresses = newAddresses.map(a => ({ ...a, isDefault: false }));
+                                                if (addressForm.index !== undefined) newAddresses[addressForm.index] = addressForm;
+                                                else newAddresses.push(addressForm);
+                                                setAddresses(newAddresses);
+                                                setAddressForm(null);
+                                            }} className="myaccount-btn myaccount-btn-primary address-save-btn">
                                                 Save Address
                                             </button>
                                             <button onClick={() => setAddressForm(null)} className="myaccount-btn myaccount-btn-outline address-cancel-btn">Cancel</button>
@@ -455,6 +414,20 @@ const MyAccount = () => {
                     )}
                 </div>
             </div>
+
+            {/* ── MOBILE: Fixed bottom navigation bar ── */}
+            <nav className="mobile-bottom-nav">
+                {tabs.map(tab => (
+                    <button
+                        key={tab.id}
+                        className={`mobile-bottom-nav-btn ${activeTab === tab.id ? 'active' : ''}`}
+                        onClick={() => setActiveTab(tab.id)}
+                    >
+                        <span className="mobile-nav-icon">{tab.icon}</span>
+                        <span className="mobile-nav-label">{tab.mobileLabel}</span>
+                    </button>
+                ))}
+            </nav>
         </div>
     );
 };
