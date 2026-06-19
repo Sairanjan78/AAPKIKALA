@@ -6189,11 +6189,26 @@ html, body {
     flex-direction: row;
     overflow-x: auto;
     gap: 0.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .myaccount-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .myaccount-nav-btn {
     white-space: nowrap;
     padding: 0.6rem 1rem;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .logout-nav {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0.6rem;
   }
 
   .nav-chevron { display: none; }
