@@ -599,6 +599,11 @@ html, body {
     width: 100%;
   }
 
+  .mobile-profile-actions .nav-link {
+    opacity: 1;
+    transform: none;
+  }
+
   .logout-text-btn {
     background: none;
     border: none;
